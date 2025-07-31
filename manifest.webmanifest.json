@@ -6,7 +6,6 @@
   "description": "Aplicacion que permite toma notas de forma rapida y sencilla.",
   "theme_color": "#1a4d80",
   "background_color": "#1a4d80",
-  "orientation": "landscape",
   "display": "fullscreen",
   "start_url":".",
   "scope": ".",
