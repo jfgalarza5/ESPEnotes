@@ -26,4 +26,11 @@ window.addEventListener('load', () => {
 
     BTN_CANCEL_POST = document.querySelector('#btn-post-cancel');
     BTN_CANCEL_POST.addEventListener('click', closePostModal);
+
+    if('serviceWorker' in navigator) {
+        const res = navigator.serviceWorker.register('/sw.js');
+        if(res){
+            console.log('Service Worker registered successfully');
+        }
+    }
 });
