@@ -93,3 +93,6 @@
   padding: 10px;
   width: calc(var(--width) - 20px);
 }
+.app--install {
+  cursor: pointer;
+}

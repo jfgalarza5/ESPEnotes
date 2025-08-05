@@ -2,6 +2,7 @@ let MAIN;
 let MODAL_POST;
 let BTN_SHOW_POST;
 let BTN_CANCEL_POST;
+let deferredPrompt;
 
 // FUNCIONES
 const showPostModal = () => {
@@ -28,9 +29,30 @@ window.addEventListener('load', () => {
     BTN_CANCEL_POST.addEventListener('click', closePostModal);
 
     if('serviceWorker' in navigator) {
-        const res = navigator.serviceWorker.register('../../sw.js');
+        const res = navigator.serviceWorker.register('/sw.js');
         if(res){
             console.log('Service Worker registered successfully');
+        }
+    }
+});
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('beforeInstallPrompt event fired');
+    e.preventDefault();
+    deferredPrompt = e;
+});
+
+const bannerInstall = document.getElementById('banner-install');
+
+bannerInstall.addEventListener('click', async () => {
+    console.log('Install button clicked');
+    if(deferredPrompt) {
+        deferredPrompt.prompt();
+        const response = await deferredPrompt.userChoice;
+        if(response.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+        } else {
+            console.log('User dismissed the install prompt');
         }
     }
 });
